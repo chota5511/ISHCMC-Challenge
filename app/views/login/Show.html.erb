@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="au theme template">
+  <meta name="author" content="Hau Nguyen">
+  <meta name="keywords" content="au theme template">
+
+  <!-- Title Page-->
+  <title>Admin page for Quan's Resume</title>
+
+  <!-- Fontfaces CSS-->
+  <link href=" /assets/admin/font-face.css" rel="stylesheet" media="all">
+  <link href=" /assets/admin/font-awesome.min.css" rel="stylesheet" media="all">
+  <link href=" /assets/admin/fontawesome-all.min.css" rel="stylesheet" media="all">
+  <link href=" /assets/admin/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+  <!-- Bootstrap CSS-->
+  <link href=" /assets/admin/bootstrap.min.css" rel="stylesheet" media="all">
+
+  <!-- Vendor CSS-->
+  <link href=" /assets/admin/animsition.min.css" rel="stylesheet" media="all">
+  <link href=" /assets/admin/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+  <link href=" /assets/admin/animate.css" rel="stylesheet" media="all">
+  <link href=" /assets/admin/hamburgers.min.css" rel="stylesheet" media="all">
+  <link href=" /assets/admin/slick.css" rel="stylesheet" media="all">
+  <link href=" /assets/admin/select2.min.css" rel="stylesheet" media="all">
+  <link href=" /assets/admin/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+  <!-- Main CSS-->
+  <link href=" /assets/admin/theme.css" rel="stylesheet" media="all">
+
+</head>
+
+<body class="animsition">
+  <div class="page-wrapper">
+    <div class="page-content--bge5">
+      <div class="container">
+        <div class="login-wrap">
+          <div class="login-content">
+            <div class="login-logo">
+              <a href="#">
+                <img src="/assets/logo-admin.png" alt="CoolAdmin">
+              </a>
+              </div>
+              <div class="login-form">
+                <form action="/login/submit" method="post">
+                  <div class="form-group">
+                    <%= token_tag %>
+                    <label>User ID</label>
+                    <input class="au-input au-input--full" required="" autofocus type="text" name="username" placeholder="User ID">
+                  </div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input class="au-input au-input--full" required="" type="password" name="password" placeholder="Password">
+                  </div>
+                  <div class="login-checkbox">
+                    <label>
+                      <input type="checkbox" name="remember">Remember Me
+                    </label>
+                    <label>
+                      <a href="#">Forgotten Password?</a>
+                    </label>
+                  </div>
+                  <% if session[:LoginStatus] != nil then %>
+                  <div class="alert alert-danger" role="alert">
+                    <%= session[:LoginStatus] %>
+                  </div>
+                  <% end %>
+                  <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jquery JS-->
+  <script src="/assets/admin/jquery-3.2.1.min.js"></script>
+  <!-- Bootstrap JS-->
+  <script src="/assets/admin/popper.min.js"></script>
+  <script src="/assets/admin/bootstrap.min.js"></script>
+  <!-- Vendor JS       -->
+  <script src="/assets/admin/slick.min.js">
+  </script>
+  <script src="/assets/admin/wow.min.js"></script>
+  <script src="/assets/admin/animsition.min.js"></script>
+  <script src="/assets/admin/bootstrap-progressbar.min.js">
+  </script>
+  <script src="/assets/admin/jquery.waypoints.min.js"></script>
+  <script src="/assets/admin/jquery.counterup.min.js">
+  </script>
+  <script src="/assets/admin/circle-progress.min.js"></script>
+  <script src="/assets/admin/perfect-scrollbar.js"></script>
+  <script src="/assets/admin/Chart.bundle.min.js"></script>
+  <script src="/assets/admin/select2.min.js">
+  </script>
+
+  <!-- Main JS-->
+  <script src="/assets/admin/main.js"></script>
+
+</body>
+
+</html>
+<!-- end document-->

@@ -1,0 +1,261 @@
+<section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="au-breadcrumb-content">
+                        <div class="au-breadcrumb-left">
+                            <span class="au-breadcrumb-span">You are here:</span>
+                            <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                <li class="list-inline-item active">
+                                    <a href="/dash-board">Dashboard</a>
+                                </li>
+                                <li class="list-inline-item seprate">
+                                    <span>/</span>
+                                </li>
+                                <li class="list-inline-item">Users</li>
+                            </ul>
+                        </div>
+                        <button class="au-btn au-btn-icon au-btn--green" data-target="#AddUser" data-toggle="modal">
+                            <i class="zmdi zmdi-plus"></i>add user
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- END BREADCRUMB-->
+<div class="main-content" style="padding-top:30px">
+    <div class="section__content section__content--p30">
+        <div class="col-lg-12">
+            <div class="car-list-top-form-inner" style="margin-top:0px;border-radius:10px">
+                <form action="/users/search" method="post">
+                  <%= token_tag %>
+                  <div class="car-list-find" style="width:78%">
+                    <h6>Find the User</h6>
+                    <input type="text" name="key" placeholder="Type user info">
+                  </div>
+                  <div class="car-list-submit">
+                    <button type="submit" class="pink-btn" style="background-color:#333;width:100%">Find Users</button>
+                  </div>
+                </form>
+            </div>
+            <div style="height:30px"></div>
+            <div class="table-responsive table--no-card m-b-30">
+                <table style="width:100%; table-layout: fixed; overflow: hidden" class="table table-borderless table-striped table-earning">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width:10%">User ID</th>
+                            <th class="text-center" style="width:20%">User Name</th>
+                            <th class="text-center" style="width:15%">Name</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center" style="width:20%">Enabled</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% @Users.each do |u| %>
+                        <tr>
+                          <td class="text-center" style="width:10%">
+                            <button data-toggle="modal" data-target="#EditUser<%= u.id %>" type="button" style="color:#555">
+                              <i class="fa fa-edit"></i>&nbsp;<%= u.id %>
+                            </button>
+                          </td>
+                          <td class="text-center" style="width:20%"><%= u.UserName %></td>
+                          <td class="text-center" style="width:20%"><%= u.Name %></td>
+                          <td class="text-center"><%= u.Email %></td>
+                          <td class="text-center" style="width:15%"><font style="text-transform:uppercase" color="<%= if u.Enabled == true then 'green' else 'red' end %>"> <%= if u.Enabled == nil then 'Deactivate' else u.Enabled end %> </font></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal-->
+<% @Users.each do |u| %>
+  <div class="modal fade" id="EditUser<%= u.id %>" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="scrollmodalLabel">Edit User Infomation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/users/<%= u.id %>/edit" method="post" enctype="multipart/form-data" class="form-horizontal">
+          <%= token_tag %>
+          <div class="modal-body">
+            <!--Content-->
+            <div class="card-body card-block">
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label class=" form-control-label">User ID</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <p class="form-control-static"><%= u.ID %></p>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="text-input" class=" form-control-label">User Name</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="text" required="" id="username" name="username" placeholder="Type name" class="form-control" value="<%= u.UserName %>">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="text-input" class=" form-control-label">Name</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="text" required="" id="name" name="name" placeholder="Type name" class="form-control" value="<%= u.Name %>">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="text-input" class=" form-control-label">Password</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="password" id="password" name="password" placeholder="Type password" class="form-control" value="">
+                </div>
+              </div>
+
+              <!--
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="text-input" class=" form-control-label">User image</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="file" accept="image/png | image/jpeg" id="image" name="image" placeholder="Choose image" class="form-control" style="border: none" value="">
+                </div>
+              </div>
+              -->
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="text-input" class=" form-control-label">Phone number</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="number" required="" id="phone" name="phone" placeholder="Type phone number" class="form-control" value="<%= u.Phone %>">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="text-input" class=" form-control-label">Email</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="text" required="" id="email" name="email" placeholder="Type email" class="form-control" value="<%= u.Email %>">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="address" class=" form-control-label">Address</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <textarea type="text-input" required="" id="address" name="address" placeholder="Content..." class="form-control" style="height: 200px;border: none"><%= u.Address %></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+            <% if u.Enabled == true then %>
+            <button type="button" class="btn btn-secondary" style="background-color:red;border-color:red" onclick="location.href='/users/<%= u.id =%>/delete'" <%= if u.UserName == 'admin' then 'disabled' end %>>Delete</button>
+            <% else %>
+            <button type="button" class="btn btn-secondary" style="background-color:green;border-color:green" onclick="location.href='/users/<%= u.id =%>/enable'">Enable</button>
+            <% end %>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="modal fade" id="AddUser" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="scrollmodalLabel">Add User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/users/create" method="post" enctype="multipart/form-data" class="form-horizontal">
+        <div class="modal-body">
+          <!--Content-->
+          <div class="modal-body">
+            <!--Content-->
+            <div class="card-body card-block">
+              <%= token_tag %>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="text-input" class=" form-control-label">User Name</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="text" required="" id="username" name="username" placeholder="Type user name" class="form-control" value="">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="text-input" class=" form-control-label">Name</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="text" required="" id="name" name="name" placeholder="Type name" class="form-control" value="">
+                </div>
+              </div>
+              <!--
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="text-input" class=" form-control-label">Project image</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="file" accept="image/png | image/jpeg" required="" id="image" name="image" placeholder="Choose image" class="form-control" style="border: none" value="">
+                </div>
+              </div>
+              -->
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="password-input" class=" form-control-label">Password</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="password" required="" id="password" name="password" placeholder="Type password" class="form-control" value="">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="phone-input" class=" form-control-label">Phone number</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="number" required="" id="phone" name="phone" placeholder="Type phone number" class="form-control" value="">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="email-input" class=" form-control-label">Email</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="text" required="" id="email" name="email" placeholder="Type email address" class="form-control" value="">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="address" class=" form-control-label">Address</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <textarea type="text-input" required="" id="address" name="address" placeholder="Content..." class="form-control" style="height: 200px;border: none"></textarea>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="">Confirm</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

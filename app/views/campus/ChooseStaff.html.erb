@@ -1,0 +1,48 @@
+<!-- END BREADCRUMB-->
+<div class="main-content" style="padding-top:110px">
+    <div class="section__content section__content--p30">
+        <div class="col-lg-12">
+            <div class="car-list-top-form-inner" style="margin-top:0px;border-radius:10px">
+                <form action="/users/search" method="post">
+                  <%= token_tag %>
+                  <div class="car-list-find" style="width:78%">
+                    <h6>Find the User</h6>
+                    <input type="text" name="key" placeholder="Type user info">
+                  </div>
+                  <div class="car-list-submit">
+                    <button type="submit" class="pink-btn" style="background-color:#333;width:100%">Find Users</button>
+                  </div>
+                </form>
+            </div>
+            <div style="height:30px"></div>
+            <div class="table-responsive table--no-card m-b-30">
+                <table style="width:100%; table-layout: fixed; overflow: hidden" class="table table-borderless table-striped table-earning">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width:10%">User ID</th>
+                            <th class="text-center" style="width:20%">User Name</th>
+                            <th class="text-center" style="width:15%">Name</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center" style="width:20%">Enabled</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% @Users.each do |u| %>
+                        <tr>
+                          <td class="text-center" style="width:10%">
+                            <button onclick="location.href='/campus/<%= @Campus.ID %>/<%= u.id %>/add-staff'" type="button" style="color:#555">
+                              <i class="fa fa-plus"></i>&nbsp;<%= u.id %>
+                            </button>
+                          </td>
+                          <td class="text-center" style="width:20%"><%= u.UserName %></td>
+                          <td class="text-center" style="width:20%"><%= u.Name %></td>
+                          <td class="text-center"><%= u.Email %></td>
+                          <td class="text-center" style="width:15%"><font style="text-transform:uppercase" color="<%= if u.Enabled == true then 'green' else 'red' end %>"> <%= if u.Enabled == nil then 'Deactivate' else u.Enabled end %> </font></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

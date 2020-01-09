@@ -1,0 +1,133 @@
+<section class="au-breadcrumb m-t-75">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="au-breadcrumb-content">
+                        <div class="au-breadcrumb-left">
+                            <span class="au-breadcrumb-span">You are here:</span>
+                            <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                <li class="list-inline-item active">
+                                    <a href="/dash-board">Dashboard</a>
+                                </li>
+                                <li class="list-inline-item seprate">
+                                    <span>/</span>
+                                </li>
+                                <li class="list-inline-item"><%= @Campus.Name %></li>
+                            </ul>
+                        </div>
+                        <div class="au-breadcrumb-left">
+                        <button class="au-btn au-btn-icon au-btn--green" onclick="location.href='/campus/<%= @Campus.ID %>/add-staff'">
+                            <i class="zmdi zmdi-plus"></i>add user
+                        </button>
+                        <button class="au-btn au-btn-icon au-btn--blue" data-target="#EditCampus" data-toggle="modal">
+                            <i class="zmdi zmdi-edit"></i>Edit
+                        </button>
+                        <button class="au-btn au-btn-icon au-btn--blue" style="background:red" onclick="location.href='/campus/<%= @Campus.ID %>/delete'">
+                            <i class="zmdi zmdi-delete"></i>Delete
+                        </button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- END BREADCRUMB-->
+<div class="main-content" style="padding-top:30px">
+    <div class="section__content section__content--p30">
+        <div class="col-lg-12">
+            <div class="car-list-top-form-inner" style="margin-top:0px;border-radius:10px">
+                <form action="/users/search" method="post">
+                  <%= token_tag %>
+                  <div class="car-list-find" style="width:78%">
+                    <h6>Find the User</h6>
+                    <input type="text" name="key" placeholder="Type user info">
+                  </div>
+                  <div class="car-list-submit">
+                    <button type="submit" class="pink-btn" style="background-color:#333;width:100%">Find Users</button>
+                  </div>
+                </form>
+            </div>
+            <div style="height:30px"></div>
+            <div class="table-responsive table--no-card m-b-30">
+                <table style="width:100%; table-layout: fixed; overflow: hidden" class="table table-borderless table-striped table-earning">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width:10%">User ID</th>
+                            <th class="text-center" style="width:20%">User Name</th>
+                            <th class="text-center" style="width:15%">Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% if @Users != nil then %>
+                        <% @Users.each do |u| %>
+                        <tr>
+                          <td class="text-center" style="width:10%">
+                            <button data-toggle="modal" onclick="location.href='/campus/<%= @Campus.ID %>/<%= u.ID %>/delete-staff'" type="button" style="color:#555">
+                              <i class="fa fa-remove"></i>&nbsp;<%= u.id %>
+                            </button>
+                          </td>
+                          <td class="text-center" style="width:20%"><%= u.UserName %></td>
+                          <td class="text-center" style="width:20%"><%= u.Name %></td>
+                        </tr>
+                        <% end %>
+                      <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditCampus" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="scrollmodalLabel">Edit Campus</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/campus/<%= @Campus.ID %>/edit" method="post" enctype="multipart/form-data" class="form-horizontal">
+        <div class="modal-body">
+          <!--Content-->
+          <div class="modal-body">
+            <!--Content-->
+            <div class="card-body card-block">
+              <%= token_tag %>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="campusid" class=" form-control-label">CampusID</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input disabled="" type="text" required="" id="campusid" name="campusid" placeholder="Type campus ID" class="form-control" value="<%= @Campus.ID %>">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="name" class=" form-control-label">Name</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <input type="text" required="" id="name" name="name" placeholder="Type campus name" class="form-control" value="<%= @Campus.Name %>">
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">
+                  <label for="address" class=" form-control-label">Address</label>
+                </div>
+                <div class="col-12 col-md-9">
+                  <textarea type="text-input" required="" id="address" name="address" placeholder="Content..." class="form-control" style="height: 200px;border: none"><%= @Campus.Address %></textarea>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="">Confirm</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

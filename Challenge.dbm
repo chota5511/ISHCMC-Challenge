@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,85" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<database name="new_database" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="Users">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="760" y="140"/>
+	<column name="ID" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="UserName" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="Password">
+		<type name="text" length="0"/>
+	</column>
+	<column name="PwHash">
+		<type name="text" length="0"/>
+	</column>
+	<column name="Name" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="Phone">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="Address">
+		<type name="text" length="0"/>
+	</column>
+	<column name="Enabled">
+		<type name="bool" length="0"/>
+	</column>
+	<column name="Email">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="Users_pk" type="pk-constr" table="public.&quot;Users&quot;">
+		<columns names="ID" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="UserName_uq" type="uq-constr" table="public.&quot;Users&quot;">
+		<columns names="UserName" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="Phone_uq" type="uq-constr" table="public.&quot;Users&quot;">
+		<columns names="Phone" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="Email_uq" type="uq-constr" table="public.&quot;Users&quot;">
+		<columns names="Email" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Campuses">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="20" y="120"/>
+	<column name="ID" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="Name">
+		<type name="text" length="0"/>
+	</column>
+	<column name="Address">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="Campuses_pk" type="pk-constr" table="public.&quot;Campuses&quot;">
+		<columns names="ID" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="CampusStaffs">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="340" y="40"/>
+	<column name="CampusID" not-null="true">
+		<type name="text" length="0"/>
+	</column>
+	<column name="UserID" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<constraint name="CampusStaffs_pk" type="pk-constr" table="public.&quot;CampusStaffs&quot;">
+		<columns names="CampusID,UserID" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="NonTeachingPositions">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="40" y="460"/>
+	<column name="ID" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="Name">
+		<type name="text" length="0"/>
+	</column>
+	<column name="Description">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="NonTechingPositions_pk" type="pk-constr" table="public.&quot;NonTeachingPositions&quot;">
+		<columns names="ID" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="TechingPositions">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="40" y="280"/>
+	<column name="ID" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="Name">
+		<type name="text" length="0"/>
+	</column>
+	<column name="Desctiption">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="TechingPositions_pk" type="pk-constr" table="public.&quot;TechingPositions&quot;">
+		<columns names="ID" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="TeachingStaffs">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="380" y="220"/>
+	<column name="PositionID" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="UserID" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<constraint name="TeachingStaffs_pk" type="pk-constr" table="public.&quot;TeachingStaffs&quot;">
+		<columns names="PositionID,UserID" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="NonTeachingStaffs">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="400" y="420"/>
+	<column name="PositionID" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="UserID" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<constraint name="NonTeachingStaffs_pk" type="pk-constr" table="public.&quot;NonTeachingStaffs&quot;">
+		<columns names="PositionID,UserID" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Administrators">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="740" y="420"/>
+	<column name="ID" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="UserID" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="Enabled">
+		<type name="bool" length="0"/>
+	</column>
+	<constraint name="Administrators_pk" type="pk-constr" table="public.&quot;Administrators&quot;">
+		<columns names="ID" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="CampusID_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="NO ACTION" ref-table="public.&quot;Campuses&quot;" table="public.&quot;CampusStaffs&quot;">
+	<columns names="CampusID" ref-type="src-columns"/>
+	<columns names="ID" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="UserID_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="NO ACTION" ref-table="public.&quot;Users&quot;" table="public.&quot;CampusStaffs&quot;">
+	<columns names="UserID" ref-type="src-columns"/>
+	<columns names="ID" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="PositionID_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="RESTRICT" ref-table="public.&quot;TechingPositions&quot;" table="public.&quot;TeachingStaffs&quot;">
+	<columns names="PositionID" ref-type="src-columns"/>
+	<columns names="ID" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="UserID_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;Users&quot;" table="public.&quot;TeachingStaffs&quot;">
+	<columns names="UserID" ref-type="src-columns"/>
+	<columns names="ID" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="PositionID_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="RESTRICT" ref-table="public.&quot;NonTeachingPositions&quot;" table="public.&quot;NonTeachingStaffs&quot;">
+	<columns names="PositionID" ref-type="src-columns"/>
+	<columns names="ID" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="UserID_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="RESTRICT" ref-table="public.&quot;Users&quot;" table="public.&quot;NonTeachingStaffs&quot;">
+	<columns names="UserID" ref-type="src-columns"/>
+	<columns names="ID" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="UserID_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="RESTRICT" ref-table="public.&quot;Users&quot;" table="public.&quot;Administrators&quot;">
+	<columns names="UserID" ref-type="src-columns"/>
+	<columns names="ID" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="&quot;rel_Campus_User_Campus&quot;" type="relfk"
+	 src-table="public.&quot;CampusStaffs&quot;"
+	 dst-table="public.&quot;Campuses&quot;" reference-fk="CampusID_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_Campus_User_User" type="relfk"
+	 src-table="public.&quot;CampusStaffs&quot;"
+	 dst-table="public.&quot;Users&quot;" reference-fk="UserID_fk"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="61.0256" y="-23.6016"/>
+	</label>
+</relationship>
+
+<relationship name="&quot;rel_Administrator_User&quot;" type="relfk"
+	 src-table="public.&quot;Administrators&quot;"
+	 dst-table="public.&quot;Users&quot;" reference-fk="UserID_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_TeachingStaff_TechingPosition" type="relfk"
+	 src-table="public.&quot;TeachingStaffs&quot;"
+	 dst-table="public.&quot;TechingPositions&quot;" reference-fk="PositionID_fk"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-86.7087" y="-28.1016"/>
+	</label>
+</relationship>
+
+<relationship name="rel_TeachingStaff_User" type="relfk"
+	 src-table="public.&quot;TeachingStaffs&quot;"
+	 dst-table="public.&quot;Users&quot;" reference-fk="UserID_fk"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-3.59154" y="6.39844"/>
+	</label>
+</relationship>
+
+<relationship name="rel_NonTeachingStaff_NonTeachingPosition" type="relfk"
+	 src-table="public.&quot;NonTeachingStaffs&quot;"
+	 dst-table="public.&quot;NonTeachingPositions&quot;" reference-fk="PositionID_fk"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-67.5759" y="-38.1016"/>
+	</label>
+</relationship>
+
+<relationship name="&quot;rel_NonTeachingStaff_User&quot;" type="relfk"
+	 src-table="public.&quot;NonTeachingStaffs&quot;"
+	 dst-table="public.&quot;Users&quot;" reference-fk="UserID_fk"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
